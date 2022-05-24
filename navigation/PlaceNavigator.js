@@ -7,7 +7,7 @@ import MapScreen from '../screens/MapScreen';
 import PlaceScreenDetails from '../screens/PlaceScreenDetails';
 import PlaceListScreen from '../screens/PlaceListScreen';
 import {COLORS} from '../constants/Color';
-import { Ionicons } from "@expo/vector-icons";
+import Icon from 'react-native-ionicons';
 const Stack = createNativeStackNavigator();
 const PlaceNavigator = () => {
   return (
@@ -29,18 +29,69 @@ const PlaceNavigator = () => {
           },
 
           headerRight: () => (
-            <Ionicons
-              name="cart"
+            <Icon
+              name="ios-add-circle-sharp"
               size={35}
               color={Platform.OS === 'android' ? COLORS.Orange : COLORS.Red}
-              onPress={() => navigation.navigate('cartScreen')}
+              onPress={() => navigation.navigate('PlaceListScreen')}
             />
           ),
         })}
       />
-      <Stack.Screen name="MapScreen" component={MapScreen} />
-      <Stack.Screen name="PlaceScreenDetails" component={PlaceScreenDetails} />
-      <Stack.Screen name="PlaceListScreen" component={PlaceListScreen} />
+
+      <Stack.Screen
+        name="MapScreen"
+        component={MapScreen}
+        options={({navigation}) => ({
+          title: 'All Products',
+          headerStyle: {
+            backgroundColor:
+              Platform.OS === 'android' ? COLORS.primaryColor : COLORS.White,
+          },
+          headerTintColor:
+            Platform.OS === 'android' ? COLORS.White : COLORS.primaryColor,
+          headerTitleStyle: {
+            fontWeight: '700',
+            fontSize: 20,
+          },
+        })}
+      />
+
+      <Stack.Screen
+        name="PlaceScreenDetails"
+        component={PlaceScreenDetails}
+        options={({navigation}) => ({
+          title: 'Add Place',
+          headerStyle: {
+            backgroundColor:
+              Platform.OS === 'android' ? COLORS.primaryColor : COLORS.White,
+          },
+          headerTintColor:
+            Platform.OS === 'android' ? COLORS.White : COLORS.primaryColor,
+          headerTitleStyle: {
+            fontWeight: '700',
+            fontSize: 20,
+          },
+        })}
+      />
+      
+      <Stack.Screen
+        name="PlaceListScreen"
+        component={PlaceListScreen}
+        options={({navigation}) => ({
+          title: 'All Products',
+          headerStyle: {
+            backgroundColor:
+              Platform.OS === 'android' ? COLORS.primaryColor : COLORS.White,
+          },
+          headerTintColor:
+            Platform.OS === 'android' ? COLORS.White : COLORS.primaryColor,
+          headerTitleStyle: {
+            fontWeight: '700',
+            fontSize: 20,
+          },
+        })}
+      />
     </Stack.Navigator>
   );
 };
