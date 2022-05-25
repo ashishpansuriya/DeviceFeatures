@@ -60,8 +60,8 @@ const PlaceNavigator = () => {
       <Stack.Screen
         name="PlaceScreenDetails"
         component={PlaceScreenDetails}
-        options={({navigation}) => ({
-          title: 'Add Place',
+        options={({navigation , route}) => ({
+          title: route.params.params,
           headerStyle: {
             backgroundColor:
               Platform.OS === 'android' ? COLORS.Black : COLORS.White,

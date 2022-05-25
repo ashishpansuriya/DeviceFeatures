@@ -8,33 +8,33 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {useSelector} from 'react-redux';
+import ItemPlace from '../components/ItemPlace';
 
 const NewPlaceScreen = props => {
+
+  
   const [selectedId, setSelectedId] = useState(null);
   const places = useSelector(state => state.places.places);
-
-  const renderItem = ({item}) => {
-    return <TouchableOpacity onPress={item.onSelect}>
-
-
-
-    </TouchableOpacity>;
-  };
 
   return (
     <View style={styles.container}>
       <FlatList
         data={places}
-        renderItem={renderItem}
+        // eslint-disable-next-line react/jsx-no-undef
+        renderItem={itemData => (
+          <ItemPlace
+            image={null}
+            title={itemData.item.title}
+            address={null}
+            select={() => {
+              props.navigation.navigate('PlaceScreenDetails', {
+                params: itemData.item.title,
+              });
+            }}
+          />
+        )}
         keyExtractor={item => item.id}
         extraData={selectedId}
-      />
-
-      <Button
-        title="Click"
-        onPress={() => {
-          props.navigation.navigate('MapScreen');
-        }}
       />
     </View>
   );
