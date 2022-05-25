@@ -2,9 +2,18 @@ import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
 import {SafeAreaView, StyleSheet, useColorScheme, View} from 'react-native';
 
+import thunk from 'redux-thunk';
+import {applyMiddleware, combineReducers, createStore} from 'redux';
+
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import PlaceNavigator from './navigation/PlaceNavigator';
+import placeReducer from './Redux/place-reducer';
+import {Provider} from 'react-redux';
+const rootReducer = combineReducers({
+  places: placeReducer,
+});
 
+const store = createStore(rootReducer, applyMiddleware(thunk));
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -13,9 +22,11 @@ const App = () => {
   };
 
   return (
-    <NavigationContainer>
-      <PlaceNavigator />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <PlaceNavigator />
+      </NavigationContainer>
+    </Provider>
   );
 };
 

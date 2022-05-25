@@ -8,19 +8,25 @@ import {
   TextInput,
   Button,
 } from 'react-native';
+import { useDispatch } from 'react-redux';
 import {COLORS} from '../constants/Color';
+import * as placeAction from '../Redux/place-action';
 
-const PlaceListScreen = () => {
+const PlaceListScreen = (props) => {
   const [titleValue, setTitleValue] = useState('');
+  const dispatch = useDispatch();
 
   const titleChangeHandler = title => {
     setTitleValue(title);
   };
-  const savePlaceHolder = () => {};
+  const savePlaceHolder = () => {
+    dispatch(placeAction.addPlace(titleValue));
+    props.navigation.goBack();
+  };
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
+    <View style={styles.container}>
+      <View style={{flex: 1, flexDirection: 'column'}}>
         <Text style={styles.label}>Title</Text>
 
         <TextInput
@@ -29,26 +35,53 @@ const PlaceListScreen = () => {
           onChangeText={titleChangeHandler}
           value={titleValue}
         />
-
-        <Button
-          title="Save Place"
-          color={COLORS.WHITE}
-          onPress={savePlaceHolder}
-        />
+        <View style={styles.buttonView}>
+          <View style={styles.buttonStyle}>
+            <Button
+              title="Save Place"
+              color={COLORS.Black}
+              onPress={savePlaceHolder}
+            />
+          </View>
+        </View>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     margin: 30,
+    flex: 1,
+    justifyContent: 'flex-end',
   },
   label: {
-    fontSize: 18,
+    fontSize: 22,
     marginBottom: 15,
+    alignSelf: 'center',
   },
-  textInput: {},
+  textInput: {
+    borderColor: COLORS.Black,
+    borderWidth: 1,
+    height:40,
+    padding: 10,
+    borderRadius: 10,
+  },
+
+  buttonView: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    position: 'relative',
+    marginTop: 40,
+  },
+  buttonStyle: {
+    borderColor: COLORS.Brown,
+    borderWidth: 2,
+    borderRadius: 10,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    color: COLORS.WHITE,
+  },
 });
 
 export default PlaceListScreen;

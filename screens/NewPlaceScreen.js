@@ -1,11 +1,34 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
-import {StyleSheet, Text, View, Button} from 'react-native';
+import React, {useState} from 'react';
+import {
+  StyleSheet,
+  FlatList,
+  View,
+  Button,
+  TouchableOpacity,
+} from 'react-native';
+import {useSelector} from 'react-redux';
 
-const NewPlaceScreen = (props) => {
+const NewPlaceScreen = props => {
+  const [selectedId, setSelectedId] = useState(null);
+  const places = useSelector(state => state.places.places);
+
+  const renderItem = ({item}) => {
+    return <TouchableOpacity onPress={item.onSelect}>
+
+
+
+    </TouchableOpacity>;
+  };
+
   return (
     <View style={styles.container}>
-      
+      <FlatList
+        data={places}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+        extraData={selectedId}
+      />
 
       <Button
         title="Click"

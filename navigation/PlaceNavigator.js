@@ -1,13 +1,13 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import {StyleSheet, Text, View, Platform} from 'react-native';
+import {StyleSheet, Text, Button, Platform} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import NewPlaceScreen from '../screens/NewPlaceScreen';
 import MapScreen from '../screens/MapScreen';
 import PlaceScreenDetails from '../screens/PlaceScreenDetails';
 import PlaceListScreen from '../screens/PlaceListScreen';
 import {COLORS} from '../constants/Color';
-import Icon from 'react-native-ionicons';
+import Ionicons from 'react-native-ionicons';
 const Stack = createNativeStackNavigator();
 const PlaceNavigator = () => {
   return (
@@ -16,10 +16,10 @@ const PlaceNavigator = () => {
         name="NewPlaceScreen"
         component={NewPlaceScreen}
         options={({navigation}) => ({
-          title: 'All Products',
+          title: 'Place Screen',
           headerStyle: {
             backgroundColor:
-              Platform.OS === 'android' ? COLORS.primaryColor : COLORS.White,
+              Platform.OS === 'android' ? COLORS.Black : COLORS.White,
           },
           headerTintColor:
             Platform.OS === 'android' ? COLORS.White : COLORS.primaryColor,
@@ -29,8 +29,8 @@ const PlaceNavigator = () => {
           },
 
           headerRight: () => (
-            <Icon
-              name="ios-add-circle-sharp"
+            <Ionicons
+              name="md-add"
               size={35}
               color={Platform.OS === 'android' ? COLORS.Orange : COLORS.Red}
               onPress={() => navigation.navigate('PlaceListScreen')}
@@ -46,10 +46,10 @@ const PlaceNavigator = () => {
           title: 'All Products',
           headerStyle: {
             backgroundColor:
-              Platform.OS === 'android' ? COLORS.primaryColor : COLORS.White,
+              Platform.OS === 'android' ? COLORS.Black : COLORS.White,
           },
           headerTintColor:
-            Platform.OS === 'android' ? COLORS.White : COLORS.primaryColor,
+            Platform.OS === 'android' ? COLORS.WHITE : COLORS.primaryColor,
           headerTitleStyle: {
             fontWeight: '700',
             fontSize: 20,
@@ -64,7 +64,7 @@ const PlaceNavigator = () => {
           title: 'Add Place',
           headerStyle: {
             backgroundColor:
-              Platform.OS === 'android' ? COLORS.primaryColor : COLORS.White,
+              Platform.OS === 'android' ? COLORS.Black : COLORS.White,
           },
           headerTintColor:
             Platform.OS === 'android' ? COLORS.White : COLORS.primaryColor,
@@ -74,7 +74,7 @@ const PlaceNavigator = () => {
           },
         })}
       />
-      
+
       <Stack.Screen
         name="PlaceListScreen"
         component={PlaceListScreen}
@@ -82,7 +82,7 @@ const PlaceNavigator = () => {
           title: 'All Products',
           headerStyle: {
             backgroundColor:
-              Platform.OS === 'android' ? COLORS.primaryColor : COLORS.White,
+              Platform.OS === 'android' ? COLORS.Black : COLORS.White,
           },
           headerTintColor:
             Platform.OS === 'android' ? COLORS.White : COLORS.primaryColor,
