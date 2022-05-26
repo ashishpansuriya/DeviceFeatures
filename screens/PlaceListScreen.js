@@ -9,6 +9,7 @@ import {
   Button,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
+import ImgPicker from '../components/ImgPicker';
 import {COLORS} from '../constants/Color';
 import * as placeAction from '../Redux/place-action';
 
@@ -35,6 +36,8 @@ const PlaceListScreen = (props) => {
           onChangeText={titleChangeHandler}
           value={titleValue}
         />
+
+        <ImgPicker />
         <View style={styles.buttonView}>
           <View style={styles.buttonStyle}>
             <Button

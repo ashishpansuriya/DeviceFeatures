@@ -17,11 +17,10 @@ const ItemPlace = props => {
 
 const styles = StyleSheet.create({
   placeItem: {
-    borderBottomColor: '#ccc',
-    borderBottomWidth: 1,
+    borderColor: '#ccc',
+    borderWidth: 2,
     paddingVertical: 15,
-    margin: 10,
-    paddingHorizontal: 30,
+    marginVertical:20,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -29,6 +28,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 35,
+    marginLeft:20,
     backgroundColor: '#ccc',
     borderColor: COLORS.primaryColor,
     borderWidth: 1,
