@@ -11,15 +11,16 @@ const ImgPicker = props => {
   const launchImageLibrary = async () => {
     let options = {
       storageOptions: {
+         
         skipBackup: true,
         path: 'images',
       },
     };
-    const image = await ImagePicker.launchImageLibrary();
+    const image = await ImagePicker.launchCamera();
 
-    console.log("image>>>",image.at(0).duration);
-    setPickImage(image.at(0).uri);
-  };
+    console.log("image>>>",image.assets);
+    // setPickImage(image.assets);
+  };  
 
   return (
     <View style={styles.container}>
