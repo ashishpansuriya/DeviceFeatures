@@ -9,6 +9,17 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import PlaceNavigator from './navigation/PlaceNavigator';
 import placeReducer from './Redux/place-reducer';
 import {Provider} from 'react-redux';
+import {init} from './helper/Db';
+
+init()
+  .then(() => {
+    console.log('Initialize');
+  })
+  .catch(err => {
+    console.log('Initialize fail');
+    console.log(err);
+  });
+
 const rootReducer = combineReducers({
   places: placeReducer,
 });
