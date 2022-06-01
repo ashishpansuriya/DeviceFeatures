@@ -8,21 +8,26 @@ import {
   TextInput,
   Button,
 } from 'react-native';
-import { useDispatch } from 'react-redux';
+import {useDispatch} from 'react-redux';
 import ImgPicker from '../components/ImgPicker';
 import {COLORS} from '../constants/Color';
 import * as placeAction from '../Redux/place-action';
 
-const PlaceListScreen = (props) => {
+const PlaceListScreen = props => {
   const [titleValue, setTitleValue] = useState('');
+  const [imagePath, setImagePath] = useState('');
   const dispatch = useDispatch();
 
   const titleChangeHandler = title => {
     setTitleValue(title);
   };
   const savePlaceHolder = () => {
-    dispatch(placeAction.addPlace(titleValue));
+    dispatch(placeAction.addPlace(titleValue ,imagePath));
     props.navigation.goBack();
+  };
+
+  const imagePathHandler = imgPath => {
+    setImagePath(imgPath);
   };
 
   return (
@@ -37,7 +42,7 @@ const PlaceListScreen = (props) => {
           value={titleValue}
         />
 
-        <ImgPicker />
+        <ImgPicker onImageTaken={imagePathHandler}/>
         <View style={styles.buttonView}>
           <View style={styles.buttonStyle}>
             <Button
@@ -66,7 +71,7 @@ const styles = StyleSheet.create({
   textInput: {
     borderColor: COLORS.Black,
     borderWidth: 1,
-    height:40,
+    height: 40,
     padding: 10,
     borderRadius: 10,
   },

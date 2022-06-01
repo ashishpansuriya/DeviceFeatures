@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React, {useState} from 'react';
 
-import {StyleSheet, View, Text, Button, Image} from 'react-native';
+import {StyleSheet, View, Text, Button, ImageBackground,PermissionsAndroid} from 'react-native';
 import {COLORS} from '../constants/Color';
 import * as ImagePicker from 'react-native-image-picker';
 
@@ -9,23 +9,41 @@ const ImgPicker = props => {
   const [imagePicker, setPickImage] = useState();
 
   const launchImageLibrary = async () => {
-    let options = {
-      storageOptions: {
-         
-        skipBackup: true,
-        path: 'images',
-      },
-    };
-    const image = await ImagePicker.launchCamera();
+    const image = await ImagePicker.launchImageLibrary();
 
-    console.log("image>>>",image.assets);
-    // setPickImage(image.assets);
-  };  
+    console.log('image>>>', image.assets[0].uri);
+    setPickImage(image.assets[0].uri);
+    props.onImageTaken(image.assets[0].uri);
+    console.log(">>>>" , imagePicker);
+  };
+
+  const requestCameraPermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.CAMERA,
+        {
+          title: "App Camera Permission",
+          message:"App needs access to your camera ",
+          buttonNeutral: "Ask Me Later",
+          buttonNegative: "Cancel",
+          buttonPositive: "OK"
+        }
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log("Camera permission given");
+        launchImageLibrary();
+      } else {
+        console.log("Camera permission denied");
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.imagePreview}>
-        <Image style={styles.image} source={{uri: imagePicker}} />
+        <ImageBackground style={styles.image} source={{uri: imagePicker}} />
       </View>
 
       <View style={styles.buttonView}>
@@ -33,14 +51,12 @@ const ImgPicker = props => {
           <Button
             title="Choose Image"
             color={COLORS.Black}
-            onPress={launchImageLibrary}
+            onPress={requestCameraPermission}
           />
         </View>
       </View>
     </View>
   );
-
-
 };
 
 const styles = StyleSheet.create({

@@ -23,7 +23,7 @@ const NewPlaceScreen = props => {
         // eslint-disable-next-line react/jsx-no-undef
         renderItem={itemData => (
           <ItemPlace
-            image={null}
+            image={itemData.item.url}
             title={itemData.item.title}
             address={null}
             select={() => {
