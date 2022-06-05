@@ -30,7 +30,7 @@ const PlaceNavigator = () => {
 
           headerRight: () => (
             <Ionicons
-              name="md-add"
+              name="add"
               size={35}
               color={Platform.OS === 'android' ? COLORS.Orange : COLORS.Red}
               onPress={() => navigation.navigate('PlaceListScreen')}

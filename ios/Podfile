@@ -23,6 +23,8 @@ target 'DeviceFeatures' do
 
   pod 'RNFS', :path => '../node_modules/react-native-fs'
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'DeviceFeaturesTests' do
     inherit! :complete
     # Pods for testing

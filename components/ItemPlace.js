@@ -1,14 +1,14 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import {Image, TouchableOpacity, StyleSheet,View,Text} from 'react-native';
+import {Image, TouchableOpacity, StyleSheet, View, Text} from 'react-native';
 import {COLORS} from '../constants/Color';
 
 const ItemPlace = props => {
-
-  console.log("ImageUrl >>>>>>> ", props.image);
+  const imagePath = 'file://' + props.image;
+  console.log('ImageUrl >>>>>>> ', imagePath);
   return (
     <TouchableOpacity onPress={props.select} style={styles.placeItem}>
-      <Image style={styles.image} source={{uri : props.image}} />
+      <Image style={styles.image} source={{uri: imagePath}} />
       <View style={styles.infoContainer}>
         <Text style={styles.title}>{props.title}</Text>
         <Text style={styles.address}>{props.address}</Text>
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderWidth: 2,
     paddingVertical: 15,
-    marginVertical:20,
+    marginVertical: 20,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 35,
-    marginLeft:20,
+    marginLeft: 20,
     backgroundColor: '#ccc',
     borderColor: COLORS.primaryColor,
     borderWidth: 1,
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     marginLeft: 25,
     width: 250,
     justifyContent: 'center',
- 
+
     alignItems: 'flex-start',
   },
   title: {
