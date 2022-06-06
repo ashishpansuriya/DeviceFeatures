@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   FlatList,
@@ -7,14 +7,18 @@ import {
   Button,
   TouchableOpacity,
 } from 'react-native';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import ItemPlace from '../components/ItemPlace';
+import * as PlaceAction from '../Redux/place-action';
 
 const NewPlaceScreen = props => {
-
   
-  const [selectedId, setSelectedId] = useState(null);
+
   const places = useSelector(state => state.places.places);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(PlaceAction.loadPlace());
+  }, [dispatch]);
 
   return (
     <View style={styles.container}>
@@ -34,7 +38,7 @@ const NewPlaceScreen = props => {
           />
         )}
         keyExtractor={item => item.id}
-        extraData={selectedId}
+   
       />
     </View>
   );
