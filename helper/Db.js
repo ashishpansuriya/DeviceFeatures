@@ -47,22 +47,20 @@ export const insertPlace = (title, imgUri, address, lat, lng) => {
   return promise;
 };
 
-
 export const fetchPlace = () => {
-  
   const promise = new Promise((resolve, reject) => {
     DB.transaction(tx => {
       tx.executeSql(
-       'SELECT * FROM places',
+        'SELECT * FROM places',
         [],
         (_, result) => {
           console.log('====================================');
-          console.log("Console Log",result);
+          console.log('Console Log', result);
           console.log('====================================');
           resolve(result);
         },
         (_, err) => {
-          reject("EROOR ACCur" + err);
+          reject('EROOR ACCur' + err);
         },
       );
     });

@@ -40,8 +40,8 @@ export const loadPlace = () => {
   return async dispatch => {
     try {
       const dbResult = await fetchPlace();
-      console.log('>> DB Log', dbResult);
-      dispatch({type: SET_PLACE, places: dbResult.rows.item});
+      console.log('>> DB Log', dbResult.rows.raw());
+      dispatch({type: SET_PLACE, places: dbResult.rows.raw()});
     } catch (err) {
       console.log(err);
     }

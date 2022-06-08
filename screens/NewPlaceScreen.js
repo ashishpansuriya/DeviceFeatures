@@ -4,30 +4,42 @@ import {
   StyleSheet,
   FlatList,
   View,
-  Button,
-  TouchableOpacity,
+  // Button,
+  // TouchableOpacity,
 } from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
+// import {useSelector, useDispatch} from 'react-redux';
 import ItemPlace from '../components/ItemPlace';
-import * as PlaceAction from '../Redux/place-action';
+// import * as PlaceAction from '../Redux/place-action';
+import {openDatabase} from 'react-native-sqlite-storage';
 
 const NewPlaceScreen = props => {
+  var db = openDatabase({name: 'places.db'});
   
-
-  const places = useSelector(state => state.places.places);
-  const dispatch = useDispatch();
+  // const places = useSelector(state => state.places.places);
+  // const dispatch = useDispatch();
+  let [flatListItems, setFlatListItems] = useState([]);
   useEffect(() => {
-    dispatch(PlaceAction.loadPlace());
-  }, [dispatch]);
+    db.transaction(tx => {
+      tx.executeSql('SELECT * FROM places', [], (tx, results) => {
+        var total = results.rows.raw().length;
+        var temp = [];
+
+        for (let i = 0; i < total; ++i)
+          // eslint-disable-next-line curly
+          temp.push(results.rows.raw()[i]);
+          setFlatListItems(temp);
+      });
+    });
+  }, [db]);
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={places}
+        data={flatListItems}
         // eslint-disable-next-line react/jsx-no-undef
         renderItem={itemData => (
           <ItemPlace
-            image={itemData.item.url}
+            image={itemData.item.uri}
             title={itemData.item.title}
             address={null}
             select={() => {
@@ -38,7 +50,6 @@ const NewPlaceScreen = props => {
           />
         )}
         keyExtractor={item => item.id}
-   
       />
     </View>
   );
